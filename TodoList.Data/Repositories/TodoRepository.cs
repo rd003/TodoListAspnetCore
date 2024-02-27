@@ -9,7 +9,7 @@ namespace TodoList.Data.Repositories;
 public interface ITodoRepository
 {
     Task<TodoItem> AddTodoItem(TodoItem item);
-    Task<IEnumerable<TodoItem>> DeleteItem(int id);
+    Task<IEnumerable<TodoItem>> GetTodoItems();
     Task DeleteTodoItem(int id);
     Task<TodoItem?> GetTaskById(int id);
     Task UpdateTodoItem(TodoItem item);
@@ -57,7 +57,7 @@ public class TodoRepository : ITodoRepository
         await connection.ExecuteAsync(sql, new { id });
     }
 
-    public async Task<IEnumerable<TodoItem>> DeleteItem(int id)
+    public async Task<IEnumerable<TodoItem>> GetTodoItems()
     {
         using IDbConnection connection = new SqlConnection(_connectionString);
         string sql = "select * from TodoItem";

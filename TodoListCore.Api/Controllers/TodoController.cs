@@ -31,4 +31,20 @@ public class TodoController : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
         }
     }
+
+    [HttpGet]
+    public async Task<IActionResult> GetTodos()
+    {
+        try
+        {
+            var todos = await _todoRepo.GetTodoItems();
+            return Ok(todos);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message);
+            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        }
+    }
+
 }
