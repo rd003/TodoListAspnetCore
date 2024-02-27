@@ -11,7 +11,7 @@ public interface ITodoRepository
     Task<TodoItem> AddTodoItem(TodoItem item);
     Task<IEnumerable<TodoItem>> GetTodoItems();
     Task DeleteTodoItem(int id);
-    Task<TodoItem?> GetTaskById(int id);
+    Task<TodoItem?> GetTodoItemById(int id);
     Task UpdateTodoItem(TodoItem item);
 }
 
@@ -42,7 +42,7 @@ public class TodoRepository : ITodoRepository
         await connection.ExecuteAsync(sql, item);
     }
 
-    public async Task<TodoItem?> GetTaskById(int id)
+    public async Task<TodoItem?> GetTodoItemById(int id)
     {
         using IDbConnection connection = new SqlConnection(_connectionString);
         string sql = "select * from TodoItem where Id =@id";
