@@ -20,6 +20,15 @@ public class TodoController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> AddTodo(TodoItem todoItem)
     {
-        return Ok();
+        try
+        {
+            var addedTodoItem = await _todoRepo.AddTodoItem(todoItem);
+            return Ok(addedTodoItem);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message);
+            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        }
     }
 }
