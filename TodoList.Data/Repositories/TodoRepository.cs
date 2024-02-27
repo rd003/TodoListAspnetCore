@@ -6,7 +6,16 @@ using TodoList.Data.Models;
 
 namespace TodoList.Data.Repositories;
 
-public class TodoRepository
+public interface ITodoRepository
+{
+    Task<TodoItem> AddTodoItem(TodoItem item);
+    Task<IEnumerable<TodoItem>> DeleteItem(int id);
+    Task DeleteTodoItem(int id);
+    Task<TodoItem?> GetTaskById(int id);
+    Task UpdateTodoItem(TodoItem item);
+}
+
+public class TodoRepository : ITodoRepository
 {
     private readonly IConfiguration _configuration;
     private readonly string _connectionString;
@@ -17,7 +26,6 @@ public class TodoRepository
         _connectionString = _configuration.GetConnectionString("default") ?? "";
     }
 
-
     public async Task<TodoItem> AddTodoItem(TodoItem item)
     {
         using IDbConnection connection = new SqlConnection(_connectionString);
@@ -26,6 +34,7 @@ public class TodoRepository
         item.Id = createdId;
         return item;
     }
+
     public async Task UpdateTodoItem(TodoItem item)
     {
         using IDbConnection connection = new SqlConnection(_connectionString);
