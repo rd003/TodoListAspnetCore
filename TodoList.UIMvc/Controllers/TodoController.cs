@@ -29,7 +29,6 @@ public class TodoController : Controller
         {
             if (!ModelState.IsValid)
                 return RedirectToAction("Index");
-
             await _todoRepo.AddTodoItem(todo);
             return RedirectToAction("Index");
         }
@@ -50,7 +49,7 @@ public class TodoController : Controller
             {
                 throw new Exception("This item does not exists");
             }
-            //  await _todoRepo.DeleteTodoItem(id);
+            await _todoRepo.DeleteTodoItem(id);
         }
         catch (Exception ex)
         {

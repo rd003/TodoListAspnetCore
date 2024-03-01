@@ -1,5 +1,9 @@
 @model IEnumerable<TodoList.Data.Models.TodoItem>
-
+<style>
+    .line-through{
+        text-decoration: line-through;
+    }
+</style>
 <h1>TodoList</h1>
 <ul>
     <li>Todo List</li>
@@ -13,8 +17,8 @@
             @foreach(var item in Model)
             {
             <li>
-                <input type="checkbox"/>
-                @item.Description
+                <input checked="@item.IsCompleted" type="checkbox" onclick="window.location.href='/todo/ToggleCompletion?id=@item.Id'" />
+                <span class='@((item.IsCompleted)?"line-through":"")'>@item.Description</span>
                 <a onclick="return window.confirm('Are you sure to delete this record?')"  asp-controller="todo" asp-action="deletetodo" asp-route-id="@item.Id">X</a>
             </li>
             }
