@@ -1,35 +1,119 @@
 @model IEnumerable<TodoList.Data.Models.TodoItem>
+@{
+
+}
 <style>
     .line-through{
         text-decoration: line-through;
     }
-</style>
-<h1>TodoList</h1>
-<ul>
-    <li>Todo List</li>
+   
 
+    .primary{
+       background-color: rgb(115 12 115);
+    }
+    .danger{
+        background-color: rgb(154, 19, 19);
+    }
+    a{
+        text-decoration: none;
+    }
+ .main-container{
+          padding: 10px 20px;
+          display: flex;
+          flex-direction: column;
+          height:100vh;
+    }
+ .todo-container{
+           flex-grow: 1;
+            padding: 10px 20px;
+    }
+       
+    .todo-list{
+    }
+    .todo-item{
+      list-style: none;
+      margin: 8px 0px;
+      display: flex;
+      gap: 15px;
+    }
+
+    .msg{
+      font-size: 16px;
+      background-color: skyblue;
+      color: rgb(31, 31, 31)
+      display:block;
+      width:100%;
+    }
+
+    .todo-form{
+        display:flex;
+        gap:5px;
+        text-align: center;
+        justify-content: center;
+        padding: 5px 0px;
+    }
+
+    .todo-btn{
+        font-size: 16px;
+        border:none;
+        padding: 10px 15px;
+        color:white;
+            border-radius: 7px;
+    }
+
+    .todo-textbox{
+        font-size: 20px;
+        width: 700px;
+        border: 1px solid gray;
+        padding: 10px 15px;
+        border-radius: 7px;
+    }
+
+    .todo-description{
+        font-size: 30px;
+    }
+
+    .todo-checkbox{
+
+    }
+
+     input[type="checkbox"] {
+        /* Double-sized Checkboxes */
+        -ms-transform: scale(2); /* IE */
+        -moz-transform: scale(2); /* FF */
+        -webkit-transform: scale(2); /* Safari and Chrome */
+        -o-transform: scale(2); /* Opera */
+        transform: scale(2);
+        padding: 10px;
+      }
+</style>
+<div class="main-container">
+<h1 style="text-align: center;">TodoList</h1>
+<div class="todo-container">
     @if(Model?.Count()==0){
           <h1>No data found</h1>
     }
     else
     {
-        <ul>
+        <ul class="todo-list">
             @foreach(var item in Model)
             {
-            <li>
-                <input checked="@item.IsCompleted" type="checkbox" onclick="window.location.href='/todo/ToggleCompletion?id=@item.Id'" />
-                <span class='@((item.IsCompleted)?"line-through":"")'>@item.Description</span>
-                <a onclick="return window.confirm('Are you sure to delete this record?')"  asp-controller="todo" asp-action="deletetodo" asp-route-id="@item.Id">X</a>
+            <li class="todo-item">
+                <input class="todo-checkbox" checked="@item.IsCompleted" type="checkbox" onclick="window.location.href='/todo/ToggleCompletion?id=@item.Id'" />
+                <span  class='todo-description @((item.IsCompleted)?"line-through":"")'>@item.Description</span>
+                <a class="todo-btn danger" onclick="return window.confirm('Are you sure to delete this record?')"  asp-controller="todo" asp-action="deletetodo" asp-route-id="@item.Id">X</a>
             </li>
             }
         </ul>
     }
-</ul>
+</div>
 @if(TempData["msg"]!=null)
 {
-    <span>@TempData["msg"]</span>
+    <span class="msg">@TempData["msg"]</span>
 }
-<form asp-action="Index">
-    <input type="text" name="Description">
-    <button>Add</button>
+<form asp-action="Index" class="todo-form">
+    <input type="text" class="todo-textbox" name="Description">
+    <button class="todo-btn primary">Add</button>
 </form>
+
+</div>
