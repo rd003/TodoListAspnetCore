@@ -21,3 +21,11 @@
         </ul>
     }
 </ul>
+@if(TempData["msg"]!=null)
+{
+    <span>@TempData["msg"]</span>
+}
+<form asp-action="Index">
+    <input type="text" name="Description">
+    <button>Add</button>
+</form>
