@@ -15,7 +15,7 @@ builder.Services.AddTransient<ITodoRepository, TodoRepository>();
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       builder =>
                       {
-                          builder.AllowAnyOrigin().AllowAnyMethod();
+                          builder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod();
                       });
 });
 

@@ -1,0 +1,23 @@
+@model IEnumerable<TodoList.Data.Models.TodoItem>
+
+<h1>TodoList</h1>
+<ul>
+    <li>Todo List</li>
+
+    @if(Model?.Count()==0){
+          <h1>No data found</h1>
+    }
+    else
+    {
+        <ul>
+            @foreach(var item in Model)
+            {
+            <li>
+                <input type="checkbox"/>
+                @item.Description
+                <button type="button">X</button>
+            </li>
+            }
+        </ul>
+    }
+</ul>
