@@ -40,4 +40,44 @@ public class TodoController : Controller
             return RedirectToAction("Index");
         }
     }
+
+    public async Task<IActionResult> DeleteTodo(int id)
+    {
+        try
+        {
+            var todoItem = await _todoRepo.GetTodoItemById(id);
+            if (todoItem == null)
+            {
+                throw new Exception("This item does not exists");
+            }
+            //  await _todoRepo.DeleteTodoItem(id);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message);
+            TempData["msg"] = "Error on deleting item";
+        }
+
+        return RedirectToAction(nameof(Index));
+    }
+
+    public async Task<IActionResult> ToggleCompletion(int id)
+    {
+        try
+        {
+            var todoItem = await _todoRepo.GetTodoItemById(id);
+            if (todoItem == null)
+            {
+                throw new Exception("This item does not exists");
+            }
+            todoItem.IsCompleted = !todoItem.IsCompleted;
+            await _todoRepo.UpdateTodoItem(todoItem);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message);
+            TempData["msg"] = "Error on deleting item";
+        }
+        return RedirectToAction(nameof(Index));
+    }
 }

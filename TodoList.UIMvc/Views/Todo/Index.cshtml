@@ -15,7 +15,7 @@
             <li>
                 <input type="checkbox"/>
                 @item.Description
-                <button type="button">X</button>
+                <a onclick="return window.confirm('Are you sure to delete this record?')"  asp-controller="todo" asp-action="deletetodo" asp-route-id="@item.Id">X</a>
             </li>
             }
         </ul>
