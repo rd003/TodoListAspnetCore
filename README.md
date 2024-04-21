@@ -14,7 +14,7 @@
 
 ## How to run the project
 
-   - Create a database. Follow the [https://github.com/rd003/TodoListAspnetCore/blob/master/TodoScript.db](script) file.
+   - Create a database. Follow the [script](https://github.com/rd003/TodoListAspnetCore/blob/master/TodoScript.db) file.
    - Change you connection string
    - Set startup project (Web Api or MVC)
 
