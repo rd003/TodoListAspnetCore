@@ -1,0 +1,11 @@
+-- Todo script
+
+  Create database TodoList
+  use database TodoList 
+
+  CREATE TABLE TodoItem
+(
+    Id INT PRIMARY KEY IDENTITY,
+    Description NVARCHAR(MAX) NOT NULL,
+    IsCompleted BIT NOT NULL
+);
